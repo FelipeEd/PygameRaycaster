@@ -1,20 +1,20 @@
 import pygame
 from settings import *
-import  math
+import math
 from map import world_map
 
 
 class Player:
     def __init__(self):
-        self.x,self.y = player_pos
+        self.x, self.y = player_pos
         self.angle = player_angle
 
     @property
     def pos(self):
-      return (self.x,self.y)
+      return (self.x, self.y)
 
     def checkWall(self):
-        return (int(self.x // 100),int(self.y // 100)) in world_map
+        return (self.x//TILE*TILE, self.y//TILE*TILE) in world_map
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -42,6 +42,10 @@ class Player:
             self.angle -= 0.1
         if keys[pygame.K_RIGHT]:
             self.angle += 0.1
+
+        if self.checkWall():
+            self.x = old_x
+            self.y = old_y
 
         self.angle = self.angle % (2*math.pi)
 
