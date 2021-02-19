@@ -8,12 +8,14 @@ class Player:
     def __init__(self):
         self.x, self.y = player_pos
         self.angle = player_angle
+        self.size = player_size
 
     @property
     def pos(self):
       return (self.x, self.y)
 
     def checkWall(self):
+        
         return (self.x//TILE*TILE, self.y//TILE*TILE) in world_map
 
     def move(self):
@@ -44,9 +46,15 @@ class Player:
             self.angle += 0.1
 
         if self.checkWall():
+            print("PAREDE")
             self.x = old_x
             self.y = old_y
 
-        self.angle = self.angle % (2*math.pi)
+        preci = 100
+        # truncamento de posição
+        self.x = int(self.x * preci)/preci
+        self.y = int(self.y * preci)/preci
+
+        self.angle = int(self.angle % (2*math.pi) *preci)/preci
 
 

@@ -2,14 +2,17 @@ from settings import  *
 
 text_map = [
     'XXXXXXXXXXXX',
-    'X.......XX.X',
-    'X..X...X...X',
-    'X.....X....X',
-    'X....X.....X',
-    'X..XXXX....X',
     'X..........X',
-    'XXXXXXXXXXXX'
+    'X.......X..X',
+    'X........X.X',
+    'X.........XX',
+    'X....X.....X',
+    'X....X.....X',
+    'XXXXXXXX.XXX'
 ]
+
+map_dimx = len(text_map)
+map_dimy = len(text_map[0])
 
 world_map = set()
 

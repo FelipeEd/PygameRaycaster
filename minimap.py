@@ -1,16 +1,20 @@
 import pygame
 from settings import *
-from map import world_map
+from map import world_map, map_dimx, map_dimy
 
-def drawMinimap(screen, player, map):
-    minimap = (0, HEIGHT - HEIGHT * MINI_SCALE, WIDTH * MINI_SCALE, HEIGHT)
-    p_x = (player.x * MINI_SCALE)
-    p_y = (player.y * MINI_SCALE) + HEIGHT - HEIGHT * MINI_SCALE
-    pygame.draw.rect(screen, DARKGRAY, minimap)
+
+def drawMinimap(screen, player, map, size_in_tiles):
+    fac = 1 / max(map_dimx,map_dimy) * size_in_tiles
+
+    p_x = (player.x) * fac
+    p_y = (player.y) * fac
+    pygame.draw.rect(screen, DARKGRAY, (0,0,TILE*size_in_tiles,TILE*size_in_tiles))
+
     for x, y in world_map:
-        new_x = (x * MINI_SCALE)
-        new_y = (y * MINI_SCALE) + HEIGHT - HEIGHT * MINI_SCALE
-        new_tile = TILE* MINI_SCALE
-        pygame.draw.rect(screen, PURPLE, (new_x,new_y, new_tile,new_tile), 5)
+        new_x = x * fac
+        new_y = y * fac
+        new_tile = TILE * fac
+
+        pygame.draw.rect(screen, PURPLE, (new_x, new_y, new_tile, new_tile), 5)
 
     pygame.draw.circle(screen , GREEN, (int(p_x), int(p_y)), 7)
